@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Simple proxy for puppeteer",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Set a proxy for the browser, can be used with pupeteer check description.", 
+    "description":"The description of the application, displayed in the web store."
+  }
+}
