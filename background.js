@@ -16,21 +16,11 @@ chrome.runtime.onInstalled.addListener(function () {
     }
   }
   );
-
-
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-    chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: { schemes: ['https', 'http'] },
-      })
-      ],
-      actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
-  });
+ 
 });
 
 
-let getStorage = (async () => {
+ (async () => {
   while (window.extOptions === undefined) {
     chrome.storage.sync.get('options', function (data) {
       //console.log(data.options);
@@ -38,42 +28,52 @@ let getStorage = (async () => {
     });
     await new Promise(resolve => setTimeout(resolve, 50));
   }
+  
+
+  window.activeProxy = window.extOptions.activeProxy;
+
+  window.setProxy = () => { 
+  
+    if(window.activeProxy !== null && window.activeProxy !== undefined) {
+      
+      if(window.activeProxy.proxyType === undefined || window.activeProxy.host === undefined || window.activeProxy.port === undefined) {
+      
+        return {error: true, message: "No proxy selected"};
+  
+      }
+      const config = {
+        mode: "fixed_servers",
+        rules: {
+          singleProxy: {
+            scheme: window.activeProxy.type,
+            host: window.activeProxy.host,
+            port: window.activeProxy.port
+          },
+          bypassList: []
+        }
+      };
+    
+    
+    chrome.proxy.settings.set(
+        {value: config, scope: 'regular'},
+        function() {}
+      );
+    
+      onProxyError.addListener( _ => { console.log('Proxy error'); });
+  
+  
+      return {error: false, message: "Proxy set to " + window.activeProxy};
+    }else{
+      return {error: true, message: "No proxy selected"};
+    }
+  
+  
+  
+   };
+
 })();
 
-window.activeProxy = window.extOptions.activeProxy;
 
-window.setProxy = () => { 
-
-  if(window.activeProxy !== null) {
-    const config = {
-      mode: "fixed_servers",
-      rules: {
-        singleProxy: {
-          scheme: window.activeProxy.type,
-          host: window.activeProxy.host,
-          port: window.activeProxy.port
-        },
-        bypassList: []
-      }
-    };
-  
-  
-  chrome.proxy.settings.set(
-      {value: config, scope: 'regular'},
-      function() {}
-    );
-  
-    onProxyError.addListener( _ => { console.log('Proxy error'); });
-
-
-    return {error: false, message: "Proxy set to " + window.activeProxy};
-  }else{
-    return {error: true, message: "No proxy selected"};
-  }
-
-
-
- };
 
 
 

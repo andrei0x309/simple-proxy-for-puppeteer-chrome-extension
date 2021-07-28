@@ -46,20 +46,38 @@ input[type=number] {
 }
 
 /*Code */
-.wrapper {
+.host {
   position: relative;
     height: 4.2em;
-    width: 10em;
+    width: 20rem;
     margin: auto;
 }
-.wrapper:after {
-  content: "seconds";
+
+.host:after {
+  content: "ex: proxy1.flashsoft.eu";
     position: absolute;
     bottom: 0.6em;
     left: 2.3em;
     width: calc(100% - 4.4em);
     text-align: center;
 }
+
+.port {
+  position: relative;
+    height: 4.2em;
+    width: 20rem;
+    margin: auto;
+}
+
+.port:after {
+  content: "ex: 1080";
+    position: absolute;
+    bottom: 0.6em;
+    left: 2.3em;
+    width: calc(100% - 4.4em);
+    text-align: center;
+}
+
 
 input {
     height: 3.2em;
@@ -123,6 +141,13 @@ input {
     background-color 0.25s linear;
 }
 
+.btn.btn-default {
+  background-color: #E3E3E3;
+  border-color: #c6c6c6;
+  margin: 0.2rem;
+  color: #434343;
+}
+
 .btn.btn-dark-blue {
   background-color: #237fbc;
   border-color: #237fbc;
@@ -150,6 +175,16 @@ input {
   box-shadow: 0 3px 0 #8f2a1f;
 }
 .btn.btn-rouge:hover {
+  background-color: #ac3420;
+}
+
+.btn.btn-green {
+  background-color: #00a65a;
+  border-color: #00a65a;
+  -webkit-box-shadow: 0 3px 0 #057a1e;
+  box-shadow: 0 3px 0 #057a1e;
+}
+.btn.btn-green:hover {
   background-color: #ac3420;
 }
 
@@ -576,15 +611,30 @@ i.icss-x:after{
     <div class="mainbody">
 
 
-    
-    <h3>Start alerting when you are not on this tab after: </h3>
-    <div class="wrapper">
-      <input id="popupTimeAlert" type="number" value="5" />
-      <span  id="btnAdd" class="input-button add">+</span>
-      <span  id="btnRem" class="input-button remove">-</span>
-    </div>
-    <hr>
+    <h3>SETTINGS: </h3>
 
+    <h3>Proxy Type: </h3>
+    <button class="btn btn-default" id="proxy-type-http">HTTP</button>
+    <button class="btn btn-default" id="proxy-type-https">HTTPS</button>
+    <button class="btn btn-default" id="proxy-type-socks4">SOCKS4</button>
+    <button class="btn btn-default" id="proxy-type-socks5">SOCKS5</button>
+
+ 
+    <h3>Proxy Host/IP: </h3>
+
+    <div class="host">
+      <input id="proxy-host" type="text" />
+    </div>
+
+    <h3>Proxy Port: </h3>
+
+    <div class="port">
+      <input id="proxy-port" type="number" />
+    </div>
+
+    <hr>
+    
+    <!-- 
     <div id="exAlert">
         <div id="exAlertBox" class="alert alert-warning" role="alert">
             <button id="closeAlertBtn" type="button" class="close-alert"><i class="icss-x"></i></button>
@@ -593,14 +643,14 @@ i.icss-x:after{
           </div>
       <hr>
     </div>
+ -->
 
 
-    <button class="btn btn-dark-blue" id="timerStartButon">Start Alert Timer on this tab</button>
-    <br><br>
-    <button class="btn btn-rouge" id="timerStopButton">Stop Repeating Alert</button>
     <hr>
-    <button class="btn btn-orange" id="extOptions"> <i class="icss-wrench"></i> Extension Settings</button>
-    
+    <p style="font-size: 1.15rem;">Proxy status: <span style="color:#3d8b3d">enabled</span> <span style="color: #8f2a1f;">disabled</span> </p>
+    <button class="btn btn-green" id="btnProxyStop"> Enable Proxy</button>
+    <br>
+    <button class="btn btn-rouge" id="btnProxyStart"> Disable Proxy</button>
   </div>
 
 

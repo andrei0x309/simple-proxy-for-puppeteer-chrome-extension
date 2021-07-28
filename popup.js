@@ -22,6 +22,10 @@ var input = document.getElementById("popupTimeAlert"),
 
 let btn_close_alert =  document.getElementById("closeAlertBtn");
 
+const btnProxyStop = document.getElementById("btnProxyStop");
+const btnProxyStart = document.getElementById("btnProxyStart");
+
+
 input.value = bgP.window.extOptions.defaultAlertTime;
 
 let displayAlert = (type, msg) => {
@@ -88,7 +92,7 @@ let bgTimerClass = (chrome.extension.getBackgroundPage().timer);
 
 
 
-
+/*
 timerStartButon.onclick = function(element) {
 
   let bgP = chrome.extension.getBackgroundPage();
@@ -157,3 +161,6 @@ extOptions.onclick = function(element) {
   chrome.runtime.openOptionsPage();
 
 };
+
+
+*/

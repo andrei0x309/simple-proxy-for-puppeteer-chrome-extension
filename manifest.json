@@ -6,26 +6,25 @@
   "version": "1.0.0",
   "version_name": "1.0.0",
   "permissions": ["storage",  "proxy", "<all_urls>", "http://*/*", "https://*/*"],
-  "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
     "persistent": true
   },
-  "page_action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/tabTimerAlert_icon16.png",
-      "32": "images/tabTimerAlert_icon32.png",
-      "48": "images/tabTimerAlert_icon48.png",
-      "128": "images/tabTimerAlert_icon128.png"
+      "16": "images/spfp_icon16.png",
+      "32": "images/spfp_icon32.png",
+      "48": "images/spfp_icon48.png",
+      "128": "images/spfp_icon128.png"
     }
   },
   "web_accessible_resources": [],
   "icons": {
-    "16": "images/tabTimerAlert_icon16.png",
-    "32": "images/tabTimerAlert_icon32.png",
-    "48": "images/tabTimerAlert_icon48.png",
-    "128": "images/tabTimerAlert_icon128.png"
+    "16": "images/spfp_icon16.png",
+    "32": "images/spfp_icon32.png",
+    "48": "images/spfp_icon48.png",
+    "128": "images/spfp_icon128.png"
   }
   
 }
