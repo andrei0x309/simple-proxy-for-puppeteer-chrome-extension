@@ -15,18 +15,63 @@ let bgP = chrome.extension.getBackgroundPage();
   timerStopButton.classList.add("alert-hidden");
 }*/
 
-var input = document.getElementById("popupTimeAlert"),
+/*var input = document.getElementById("popupTimeAlert"),
     input_val = parseInt(input.value),
     btn_add = document.getElementById("btnAdd"),
     btn_remove = document.getElementById("btnRem");
+*/
+
 
 let btn_close_alert =  document.getElementById("closeAlertBtn");
 
 const btnProxyStop = document.getElementById("btnProxyStop");
 const btnProxyStart = document.getElementById("btnProxyStart");
 
+console.log(btnProxyStop, btnProxyStart);
 
-input.value = bgP.window.extOptions.defaultAlertTime;
+const btnProxyTypeHttp = document.getElementById("btnProxyTypeHttp");
+const btnProxyTypeHttps =  document.getElementById("btnProxyTypeHttps");
+const btnProxyTypeSocks4 =  document.getElementById("btnProxyTypeSocks4");
+const btnProxyTypeSocks5 =  document.getElementById("btnProxyTypeSocks5");
+
+const spanProxyStatusOn = document.getElementById("spanProxyStatusOn");
+const spanProxyStatusOff = document.getElementById("spanProxyStatusOff");
+
+const updatePopup = function(options){
+
+if(options.proxyEnabled){
+  spanProxyStatusOff.classList.add("hidden");
+  spanProxyStatusOn.classList.remove("hidden");
+
+  btnProxyStart.classList.add("hidden");
+  btnProxyStop.classList.remove("hidden");
+}else{
+
+  spanProxyStatusOn.classList.add("hidden");
+  spanProxyStatusOff.classList.remove("hidden");
+
+  btnProxyStart.classList.remove("hidden");
+  btnProxyStop.classList.add("hidden");
+}
+
+};
+
+updatePopup(bgP.window.extOptions);
+
+
+
+btnProxyStop.onclick = function(){
+  bgP.window.disableProxy();
+};
+
+btnProxyStart.onclick = function(){
+ console.log(bgP.window.setProxy({
+  type:'https',
+  host:'blade1.amsterdam-rack451.nodes.gen4.ninja',
+  port: 9002
+}));
+};
+
 
 let displayAlert = (type, msg) => {
   if(type === "error"){
@@ -38,12 +83,15 @@ let displayAlert = (type, msg) => {
   }
   
   document.getElementById("alertMsg").innerHTML = msg;
-  document.getElementById("exAlert").classList.remove("alert-hidden");
+  document.getElementById("exAlert").classList.remove("hidden");
 }
 
 
 let closeAlert = () => {
-  document.getElementById("exAlert").classList.add("alert-hidden");
+  const alert = document.getElementById("exAlert");
+  if(alert){
+    document.getElementById("exAlert").classList.add("hidden");
+  }
 }
 closeAlert();
 
@@ -51,6 +99,8 @@ btn_close_alert.addEventListener("click", function(){
   closeAlert();
 }); 
 
+
+/*
 
 btn_add.addEventListener("click", function(){
   input.value = parseInt(input.value) + 10;
@@ -65,7 +115,7 @@ btn_remove.addEventListener("click", function(){
   }
 }); 
  
-
+*/
 
 
 /*
@@ -82,9 +132,9 @@ var logFunction = function(arr){
   console.log(arr);      
 }
 
-console.log(chrome.extension.getBackgroundPage());
-console.log(chrome.extension.getBackgroundPage().timer);
-let bgTimerClass = (chrome.extension.getBackgroundPage().timer);
+//console.log(chrome.extension.getBackgroundPage());
+//console.log(chrome.extension.getBackgroundPage().timer);
+//let bgTimerClass = (chrome.extension.getBackgroundPage().timer);
 
 
 

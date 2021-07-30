@@ -185,7 +185,7 @@ input {
   box-shadow: 0 3px 0 #057a1e;
 }
 .btn.btn-green:hover {
-  background-color: #ac3420;
+  background-color: #094115;
 }
 
 /* hr */
@@ -546,7 +546,7 @@ i.icss-x:after{
     font-size: 1.1em;
 }
 
-.alert-hidden{
+.hidden{
   display: none;
 }
 
@@ -614,11 +614,12 @@ i.icss-x:after{
     <h3>SETTINGS: </h3>
 
     <h3>Proxy Type: </h3>
-    <button class="btn btn-default" id="proxy-type-http">HTTP</button>
-    <button class="btn btn-default" id="proxy-type-https">HTTPS</button>
-    <button class="btn btn-default" id="proxy-type-socks4">SOCKS4</button>
-    <button class="btn btn-default" id="proxy-type-socks5">SOCKS5</button>
-
+    <div id="proxyTypeGroup">
+    <button class="btn btn-default" id="btnProxyTypeHttp">HTTP</button>
+    <button class="btn btn-default btn-green" id="btnProxyTypeHttps">HTTPS</button>
+    <button class="btn btn-default" id="btnProxyTypeSocks4">SOCKS4</button>
+    <button class="btn btn-default" id="btnProxyTypeSocks5">SOCKS5</button>
+    </div>
  
     <h3>Proxy Host/IP: </h3>
 
@@ -634,7 +635,7 @@ i.icss-x:after{
 
     <hr>
     
-    <!-- 
+     
     <div id="exAlert">
         <div id="exAlertBox" class="alert alert-warning" role="alert">
             <button id="closeAlertBtn" type="button" class="close-alert"><i class="icss-x"></i></button>
@@ -643,14 +644,16 @@ i.icss-x:after{
           </div>
       <hr>
     </div>
- -->
+   
 
 
     <hr>
-    <p style="font-size: 1.15rem;">Proxy status: <span style="color:#3d8b3d">enabled</span> <span style="color: #8f2a1f;">disabled</span> </p>
-    <button class="btn btn-green" id="btnProxyStop"> Enable Proxy</button>
+    <p style="font-size: 1.15rem;">Proxy status: 
+      <span id="spanProxyStatusOn" style="color:#3d8b3d">enabled</span>
+      <span id="spanProxyStatusOff" style="color: #8f2a1f;">disabled</span></p>
+    <button class="btn btn-green" id="btnProxyStart"> Enable Proxy</button>
     <br>
-    <button class="btn btn-rouge" id="btnProxyStart"> Disable Proxy</button>
+    <button class="btn btn-rouge" id="btnProxyStop"> Disable Proxy</button>
   </div>
 
 

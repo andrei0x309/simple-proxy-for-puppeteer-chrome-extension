@@ -11,12 +11,28 @@ chrome.runtime.onInstalled.addListener(function () {
     options:
     {
       activeProxy: null,
-      enableExt: false,
+      proxyEnabled: false,
       proxyList : [],
     }
   }
   );
  
+});
+
+
+const setOptions = async (options) =>  {
+  await new Promise(function (resolve, reject) {
+  chrome.storage.local.set(options, function() {
+    resolve();
+   });
+  });
+  window.extOptions = options;
+}
+
+
+
+chrome.storage.local.set({key: value}, function() {
+  console.log('Value is set to ' + value);
 });
 
 
@@ -32,11 +48,29 @@ chrome.runtime.onInstalled.addListener(function () {
 
   window.activeProxy = window.extOptions.activeProxy;
 
-  window.setProxy = () => { 
-  
+
+  window.disableProxy = () => { 
+    console.log('disable proxy');
+  const config = {
+      mode: "direct",
+    };
+
+  chrome.proxy.settings.set(
+      {value: config, scope: 'regular'},
+      function() {}
+    );
+
+  };
+
+  window.setProxy = (proxy) => { 
+    console.log('set proxy');
+    if (proxy) {
+      window.activeProxy = proxy;
+    }
+
     if(window.activeProxy !== null && window.activeProxy !== undefined) {
       
-      if(window.activeProxy.proxyType === undefined || window.activeProxy.host === undefined || window.activeProxy.port === undefined) {
+      if(window.activeProxy.type === undefined || window.activeProxy.host === undefined || window.activeProxy.port === undefined) {
       
         return {error: true, message: "No proxy selected"};
   
@@ -53,6 +87,7 @@ chrome.runtime.onInstalled.addListener(function () {
         }
       };
     
+    console.log(config);
     
     chrome.proxy.settings.set(
         {value: config, scope: 'regular'},
