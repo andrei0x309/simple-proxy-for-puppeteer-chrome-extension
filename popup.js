@@ -29,13 +29,42 @@ const btnProxyStart = document.getElementById("btnProxyStart");
 
 console.log(btnProxyStop, btnProxyStart);
 
-const btnProxyTypeHttp = document.getElementById("btnProxyTypeHttp");
-const btnProxyTypeHttps =  document.getElementById("btnProxyTypeHttps");
-const btnProxyTypeSocks4 =  document.getElementById("btnProxyTypeSocks4");
-const btnProxyTypeSocks5 =  document.getElementById("btnProxyTypeSocks5");
+const proxyTypeGroup = document.getElementById("proxyTypeGroup");
 
+const btnProxyType = [
+  document.getElementById("btnProxyTypeHttp"),
+  document.getElementById("btnProxyTypeHttps"),
+  document.getElementById("btnProxyTypeSocks4"),
+  document.getElementById("btnProxyTypeSocks5"),
+];
+
+for( const btn of btnProxyType){
+  if(btn){
+    btn.onclick = async function(){
+      const active = proxyTypeGroup.querySelector(".btn-green");
+      if(active){
+        active.classList.remove("btn-green");
+      }
+      this.classList.add("btn-green");
+      bgP.window.extOptions.activeProxy.type =  (this.id.replace('btnProxyType','')).toLowerCase();
+      await bgP.window.setOptions( bgP.window.extOptions);
+    }
+  }
+}
+
+
+
+ 
 const spanProxyStatusOn = document.getElementById("spanProxyStatusOn");
 const spanProxyStatusOff = document.getElementById("spanProxyStatusOff");
+
+const inputproxyHost = document.getElementById("proxyHost");
+const inputproxyPort = document.getElementById("proxyPort");
+
+
+
+
+
 
 const updatePopup = function(options){
 
@@ -54,6 +83,14 @@ if(options.proxyEnabled){
   btnProxyStop.classList.add("hidden");
 }
 
+if(options.activeProxy) {
+  const types = ['http', 'https', 'socks4', 'socks5'];
+  if(options.activeProxy.type) btnProxyType[types.indexOf(options.activeProxy.type)].classList.add("btn-green");
+  inputproxyHost.value = options.activeProxy.host;
+  inputproxyPort.value = options.activeProxy.port;
+}
+
+
 };
 
 updatePopup(bgP.window.extOptions);
@@ -61,15 +98,19 @@ updatePopup(bgP.window.extOptions);
 
 
 btnProxyStop.onclick = function(){
+  bgP.window.extOptions.proxyEnabled = false;
+  bgP.window.setOptions(bgP.window.extOptions);
   bgP.window.disableProxy();
+  updatePopup(bgP.window.extOptions);
 };
 
 btnProxyStart.onclick = function(){
- console.log(bgP.window.setProxy({
-  type:'https',
-  host:'blade1.amsterdam-rack451.nodes.gen4.ninja',
-  port: 9002
-}));
+  bgP.window.extOptions.activeProxy.host = inputproxyHost.value;
+  bgP.window.extOptions.activeProxy.port = inputproxyPort.value;
+  bgP.window.extOptions.proxyEnabled = true;
+  bgP.window.setOptions(bgP.window.extOptions);
+  bgP.window.setProxy(bgP.window.extOptions.activeProxy);
+  updatePopup(bgP.window.extOptions);
 };
 
 

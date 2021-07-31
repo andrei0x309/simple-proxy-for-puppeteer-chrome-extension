@@ -10,7 +10,11 @@ chrome.runtime.onInstalled.addListener(function () {
   chrome.storage.sync.set({
     options:
     {
-      activeProxy: null,
+      activeProxy: {
+        type: '',
+        host: '',
+        port: null,
+      },
       proxyEnabled: false,
       proxyList : [],
     }
@@ -20,7 +24,7 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 
-const setOptions = async (options) =>  {
+window.setOptions = async (options) =>  {
   await new Promise(function (resolve, reject) {
   chrome.storage.local.set(options, function() {
     resolve();
@@ -28,26 +32,24 @@ const setOptions = async (options) =>  {
   });
   window.extOptions = options;
 }
-
-
-
-chrome.storage.local.set({key: value}, function() {
-  console.log('Value is set to ' + value);
-});
-
+ 
 
  (async () => {
   while (window.extOptions === undefined) {
     chrome.storage.sync.get('options', function (data) {
       //console.log(data.options);
+      if( typeof data.options.activeProxy !== 'object'){
+        data.options.activeProxy = {
+          type: '',
+          host: '',
+          port: null,
+        };
+      }
       window.extOptions = data.options;
     });
     await new Promise(resolve => setTimeout(resolve, 50));
   }
   
-
-  window.activeProxy = window.extOptions.activeProxy;
-
 
   window.disableProxy = () => { 
     console.log('disable proxy');
@@ -64,24 +66,22 @@ chrome.storage.local.set({key: value}, function() {
 
   window.setProxy = (proxy) => { 
     console.log('set proxy');
-    if (proxy) {
-      window.activeProxy = proxy;
+    
+    if (!proxy) {
+      proxy = window.extOptions.activeProxy;
     }
 
-    if(window.activeProxy !== null && window.activeProxy !== undefined) {
-      
-      if(window.activeProxy.type === undefined || window.activeProxy.host === undefined || window.activeProxy.port === undefined) {
-      
-        return {error: true, message: "No proxy selected"};
-  
+      if( !proxy.type  || !proxy || !proxy.port) {
+        return {error: true, message: "Invalid Proxy"};
       }
+
       const config = {
         mode: "fixed_servers",
         rules: {
           singleProxy: {
-            scheme: window.activeProxy.type,
-            host: window.activeProxy.host,
-            port: window.activeProxy.port
+            scheme: proxy.type,
+            host: proxy.host,
+            port: parseInt(proxy.port)
           },
           bypassList: []
         }
@@ -94,15 +94,11 @@ chrome.storage.local.set({key: value}, function() {
         function() {}
       );
     
-      onProxyError.addListener( _ => { console.log('Proxy error'); });
+      chrome.proxy.onProxyError.addListener( _ => { console.log('Proxy error event triigerd by  chrome.proxy.onProxyError'); });
   
   
-      return {error: false, message: "Proxy set to " + window.activeProxy};
-    }else{
-      return {error: true, message: "No proxy selected"};
-    }
-  
-  
+      return {error: false, message: "Proxy set to " + proxy};
+ 
   
    };
 
