@@ -11,7 +11,7 @@ chrome.runtime.onInstalled.addListener(function () {
     options:
     {
       activeProxy: {
-        type: '',
+        type: 'http',
         host: '',
         port: null,
       },
@@ -25,8 +25,8 @@ chrome.runtime.onInstalled.addListener(function () {
 
 
 window.setOptions = async (options) =>  {
-  await new Promise(function (resolve, reject) {
-  chrome.storage.local.set(options, function() {
+  await new Promise(function (resolve) {
+  chrome.storage.sync.set({'options':options}, function() {
     resolve();
    });
   });
@@ -38,14 +38,14 @@ window.setOptions = async (options) =>  {
   while (window.extOptions === undefined) {
     chrome.storage.sync.get('options', function (data) {
       //console.log(data.options);
-      if( typeof data.options.activeProxy !== 'object'){
-        data.options.activeProxy = {
-          type: '',
+      if( typeof data.activeProxy !== 'object'){
+        data.activeProxy = {
+          type: 'http',
           host: '',
           port: null,
         };
       }
-      window.extOptions = data.options;
+      window.extOptions = data;
     });
     await new Promise(resolve => setTimeout(resolve, 50));
   }
@@ -71,7 +71,7 @@ window.setOptions = async (options) =>  {
       proxy = window.extOptions.activeProxy;
     }
 
-      if( !proxy.type  || !proxy || !proxy.port) {
+      if( !proxy.type  || !proxy.host || !proxy.port) {
         return {error: true, message: "Invalid Proxy"};
       }
 

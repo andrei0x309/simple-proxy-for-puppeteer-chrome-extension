@@ -179,13 +179,14 @@ input {
 }
 
 .btn.btn-green {
-  background-color: #00a65a;
-  border-color: #00a65a;
+  background-color: #08d87a;
+  border-color: #03c76f;
   -webkit-box-shadow: 0 3px 0 #057a1e;
   box-shadow: 0 3px 0 #057a1e;
 }
 .btn.btn-green:hover {
   background-color: #094115;
+  color: rgba(255, 255, 255, 0.918);
 }
 
 /* hr */
@@ -603,59 +604,209 @@ i.icss-x:after{
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
+/* // TABS */
+
+.container--tabs {
+  margin: 1rem 0rem 1rem 0rem;
+}
+.container--tabs .nav-tabs {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  list-style-type: none;
+  border-bottom: 0.2rem solid #999;
+}
+.container--tabs .nav-tabs > li {
+  margin-bottom: 0.1rem;
+}
+.container--tabs .nav-tabs > li > a {
+  margin-right: 0.4rem;
+  line-height: 1.42857143;
+  padding: 0.52em;
+  border: 0.2rem solid transparent;
+  border-radius: 4px 4px 0 0;
+  color: green;
+}
+.container--tabs .nav-tabs > li > a:hover {
+  border-color: #ddd #ddd #fff #ddd;
+}
+.container--tabs .nav-tabs > li.active > a,
+.container--tabs .nav-tabs > li.active > a:hover,
+.container--tabs .nav-tabs > li.active > a:focus {
+  color: #222;
+  cursor: default;
+  background-color: #fff;
+  border: 0.2rem solid #999;
+  border-bottom-color: transparent;
+}
+.container--tabs .tab-content {
+  float: left;
+  width: 100%;
+}
+.container--tabs .tab-content > .tab-pane {
+  display: none;
+}
+.container--tabs .tab-content > .tab-pane.active {
+  display: block;
+  padding: 1.5% 1.5%;
+}
+.container--tabs .tab-content > .active {
+  display: block;
+}
+
 
 
     </style>
   </head>
   <body>
-    <div class="mainbody">
-
-
-    <h3>SETTINGS: </h3>
-
-    <h3>Proxy Type: </h3>
-    <div id="proxyTypeGroup">
-    <button class="btn btn-default" id="btnProxyTypeHttp">HTTP</button>
-    <button class="btn btn-default" id="btnProxyTypeHttps">HTTPS</button>
-    <button class="btn btn-default" id="btnProxyTypeSocks4">SOCKS4</button>
-    <button class="btn btn-default" id="btnProxyTypeSocks5">SOCKS5</button>
-    </div>
+    <div class="mainbody" style="min-width: 100%;">
  
-    <h3>Proxy Host/IP: </h3>
+      <div class="container--tabs">
+        <section class="row">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-1">Proxy</a></li>
+            <li class=""><a href="#tab-2">Pupeteer</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane active"> 
+              
 
-    <div class="host">
-      <input id="proxyHost" type="text" />
-    </div>
-
-    <h3>Proxy Port: </h3>
-
-    <div class="port">
-      <input id="proxyPort" type="number" />
-    </div>
-
-    <hr>
-    
-     
-    <div id="exAlert">
-        <div id="exAlertBox" class="alert alert-warning" role="alert">
-            <button id="closeAlertBtn" type="button" class="close-alert"><i class="icss-x"></i></button>
-            <i class="icss-exclamation-circle"></i>&nbsp;
-            <span style="line-height: 2em; display: inline-table;" id="alertMsg">Message </span>
-          </div>
-      <hr>
-    </div>
+              <h3>Proxy Type: </h3>
+      <div id="proxyTypeGroup">
+      <button class="btn btn-default" id="btnProxyTypeHttp">HTTP</button>
+      <button class="btn btn-default" id="btnProxyTypeHttps">HTTPS</button>
+      <button class="btn btn-default" id="btnProxyTypeSocks4">SOCKS4</button>
+      <button class="btn btn-default" id="btnProxyTypeSocks5">SOCKS5</button>
+      </div>
    
+      <h3>Proxy Host/IP: </h3>
+  
+      <div class="host">
+        <input id="proxyHost" type="text" />
+      </div>
+  
+      <h3>Proxy Port: </h3>
+  
+      <div class="port">
+        <input id="proxyPort" type="number" />
+      </div>
+  
+      <hr>
+      
+       
+      <div id="exAlert">
+          <div id="exAlertBox" class="alert alert-warning" role="alert">
+              <button id="closeAlertBtn" type="button" class="close-alert"><i class="icss-x"></i></button>
+              <i class="icss-exclamation-circle"></i>&nbsp;
+              <span style="line-height: 2em; display: inline-table;" id="alertMsg">Message </span>
+            </div>
+        <hr>
+      </div>
+     
+  
+  
+      <hr>
+      <p style="font-size: 1.15rem;">Proxy status: 
+        <span id="spanProxyStatusOn" style="color:#3d8b3d">enabled</span>
+        <span id="spanProxyStatusOff" style="color: #8f2a1f;">disabled</span></p>
+      <button class="btn btn-green" id="btnProxyStart"> Enable Proxy</button>
+      <br>
+      <button class="btn btn-rouge" id="btnProxyStop"> Disable Proxy</button>
 
+              
 
-    <hr>
-    <p style="font-size: 1.15rem;">Proxy status: 
-      <span id="spanProxyStatusOn" style="color:#3d8b3d">enabled</span>
-      <span id="spanProxyStatusOff" style="color: #8f2a1f;">disabled</span></p>
-    <button class="btn btn-green" id="btnProxyStart"> Enable Proxy</button>
-    <br>
-    <button class="btn btn-rouge" id="btnProxyStop"> Disable Proxy</button>
-  </div>
+            </div> 
+            <div id="tab-2" class="tab-pane" style="font-size: 0.9rem;text-align: left;">
+              <br><br>
+              This extension is primarily to be used with Puppeteer to control the proxy setting of the web browser.
+              <br><br>
+              But you can use it as a simple proxy extension without Puppeteer. The only requirement is a working proxy server.
+                            <br><br>
+                            Here is a code example of how to use it programatically with Pupeteer:
+                            <br><br>
+ 
+<div style="background: #1d1d1d;
+overflow: scroll;
+width: 330px;
+border: solid gray;
+border-width: .1em .1em .1em .8em;
+padding: .2em .6em;
+font-size: 9px;
+text-align: left;
+color: coral;">
+<table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">async</span> <span style="color: #f8f8f2">()</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #75715e">// ...</span>
+    <span style="color: #75715e">// Proxy Object - Replace with a working proxy</span>
+    <span style="color: #75715e">// Be sure that the proxy server is working </span>
+    <span style="color: #75715e">// otherwise the browser won&#39;t be able to access the internet</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">proxy</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">type</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;http&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">host</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&quot;127.0.0.1&quot;</span><span style="color: #f8f8f2">,</span>
+      <span style="color: #a6e22e">port</span><span style="color: #f92672">:</span> <span style="color: #ae81ff">8888</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #f8f8f2">};</span>
+  
+    <span style="color: #75715e">// Start puppeteer</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">browser</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">await</span> <span style="color: #a6e22e">puppeteer</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">launch</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">options</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #75715e">// get the extension context</span>
+    <span style="color: #75715e">// be sure to check with the actual extension id from managing extensions </span>
+    <span style="color: #75715e">// extension id should be : &#39;iaogkfhfileohnippcacldlglfbgbpji&#39;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #a6e22e">proxyExtension</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">await</span> <span style="color: #a6e22e">browser</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">waitForTarget</span><span style="color: #f8f8f2">(</span>
+      <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">t</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span>
+        <span style="color: #a6e22e">t</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">type</span><span style="color: #f8f8f2">()</span> <span style="color: #f92672">===</span> <span style="color: #e6db74">&quot;background_page&quot;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #a6e22e">t</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">url</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">includes</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;iaogkfhfileohnippcacldlglfbgbpji&quot;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">);</span>
+  
+    <span style="color: #75715e">// set the proxy</span>
+    <span style="color: #a6e22e">proxyExtension</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">evaluate</span><span style="color: #f8f8f2">((</span><span style="color: #a6e22e">proxy</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+      <span style="color: #a6e22e">chrome</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">tabs</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">query</span><span style="color: #f8f8f2">({</span> <span style="color: #a6e22e">active</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">true</span> <span style="color: #f8f8f2">},</span> <span style="color: #a6e22e">async</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">proxy</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">=&gt;</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">window.</span><span style="color: #a6e22e">setProxy</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">proxy</span><span style="color: #f8f8f2">);</span>
+      <span style="color: #f8f8f2">});</span>
+    <span style="color: #f8f8f2">},</span> <span style="color: #a6e22e">proxy</span><span style="color: #f8f8f2">);</span>
+  
+    <span style="color: #75715e">// ...</span>
+  <span style="color: #f8f8f2">})();</span>
+</pre></td></tr></table></div>
+<br><br>
 
+You can use <b>window.setProxy(proxy)</b> to set programaticaly the proxy for the browser at any moment you want,
+if you want to disable the proxy use <b>window.setProxy(disableProxy)</b>.
+
+ 
+            </div>
+       
+          </div>
+        </section>
+        </div>
+ 
+      </div>
 
     <script src="popup.js"></script>
   </body>
