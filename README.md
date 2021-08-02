@@ -23,8 +23,8 @@ Here is a code example of how to use it programatically with Pupeteer:
   const browser = await puppeteer.launch(options);
   // get the extension context
   // be sure to replace the extension id with the actual extension id check the extension id in the extension manager
-  // usually it should be: 'iaogkfhfileohnippcacldlglfbgbpji'
-  const proxyExtension = await browser.waitForTarget((t) => t.type() === 'background_page' && t.url().includes('iaogkfhfileohnippcacldlglfbgbpji'));
+  // usually it should be: 'meeohdhldndmeffgoccpgacfdigmphab'
+  const proxyExtension = await browser.waitForTarget((t) => t.type() === 'background_page' && t.url().includes('meeohdhldndmeffgoccpgacfdigmphab'));
 
   // set the proxy
   proxyExtension.evaluate((proxy) => {

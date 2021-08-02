@@ -1,12 +1,11 @@
 {
   "manifest_version": 2,
-  "key": "AAAAB3NzaC1yc2EAAAADAQABAAABAQCsUjAtHzQYrFMPlcdwNIo8RvIvQQzbNpiyeb3AiwphEPUKztyLctQn63ucAksE74AgwKzWpJl6Xd5pK3SDEvqRycCjVO+qd8iDPvBWzWWWlgZNy4PN1QbeVm6dlhrjz3ARp9sqe+yxa3J4OyZOZODh/wJz/eHtdCYWfi+v2uRQqiI1u4PZo5/1u4mOn2syI97K6I+6WJt0Pz/TpvOWC3eGiI/t4ZSxVv+cqhy2GVrYoKhAwnMOo9hQvXikaBv3aINDBaii9pm29NHyzBjogcd3P9Lz1Q/P/V2T+zoRboS2b9fY/w0dL8+5MlZHBa0ciV2DVYJA1579qbP3UKnZYgZN",
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
   "version": "1.0.0",
   "version_name": "1.0.0",
-  "permissions": ["storage", "proxy", "<all_urls>", "http://*/*", "https://*/*"],
+  "permissions": ["storage", "proxy"],
   "background": {
     "scripts": ["background.js"],
     "persistent": true

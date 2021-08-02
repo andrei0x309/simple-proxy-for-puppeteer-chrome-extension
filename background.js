@@ -20,7 +20,6 @@ chrome.runtime.onInstalled.addListener(async () => {
           port: null,
         },
         proxyEnabled: false,
-        proxyList: [],
       },
     ],
   });
@@ -31,8 +30,11 @@ window.setOptions = async (options) => {
 };
 
 (async () => {
-  const data = (await getStorageData('options')).options[0];
-  console.log(data);
+  let data;
+  data = await getStorageData('options');
+  if (data.options) data = data.options[0];
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
   if (typeof data.activeProxy !== 'object') {
     data.activeProxy = {
       type: 'http',
