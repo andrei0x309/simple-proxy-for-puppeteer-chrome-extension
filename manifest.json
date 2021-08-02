@@ -6,7 +6,7 @@
   "default_locale": "en",
   "version": "1.0.0",
   "version_name": "1.0.0",
-  "permissions": [ "storage",  "proxy", "<all_urls>", "http://*/*", "https://*/*"],
+  "permissions": ["storage", "proxy", "<all_urls>", "http://*/*", "https://*/*"],
   "background": {
     "scripts": ["background.js"],
     "persistent": true
@@ -27,5 +27,4 @@
     "48": "images/spfp_icon48.png",
     "128": "images/spfp_icon128.png"
   }
-  
 }
