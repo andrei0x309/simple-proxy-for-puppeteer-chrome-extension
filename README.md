@@ -4,6 +4,8 @@ This extension is primarily to be used with Puppeteer to control the proxy setti
 
 Download from Chrome-Store:
 
+[https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab/related?hl=ro](https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab/related?hl=ro)
+
 But you can use it as a simple proxy extension without Puppeteer. The only requirement is a working proxy server.
 
 Here is a code example of how to use it programatically with Pupeteer:
@@ -42,3 +44,9 @@ Here is a code example of how to use it programatically with Pupeteer:
 - Be sure to set the proxy with a working proxy, the extension dosen't verify that your proxy is working, if the proxy is bad your connections will fail -> NET:ERR.
 
 - You can use **window.setProxy(proxy)** to set programaticaly the proxy for the browser at any time you want(probably after some x request), if you want to disable the proxy(direct access) use **window.setProxy(disableProxy)**.
+
+- The extension does not support proxy authentication, HTTP and HTTPS proxy auth can be implemented, fell free to sumbit a pull request. As of the moment of this commit chromium browsers do not support SOCKS authentication.
+
+## License
+
+MIT
