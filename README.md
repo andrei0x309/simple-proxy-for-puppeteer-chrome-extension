@@ -4,7 +4,7 @@ This extension is primarily to be used with Puppeteer to control the proxy setti
 
 Download from Chrome-Store:
 
-[https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab/related?hl=ro](https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab/related?hl=ro)
+[https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab](https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab)
 
 But you can use it as a simple proxy extension without Puppeteer. The only requirement is a working proxy server.
 
