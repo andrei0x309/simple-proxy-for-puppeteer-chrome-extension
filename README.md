@@ -1,52 +1,32 @@
-## Simple Proxy For Pupeteer (chrome extension)
+## Simple Proxy For Pupeteer (browser extension)
 
-This extension is primarily to be used with Puppeteer to control the proxy setting of a chromium based web browser.
+This extension can be used with Puppeteer to control the proxy setting of a chromium based web browser.
 
 Download from Chrome-Store:
 
 [https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab](https://chrome.google.com/webstore/detail/simple-proxy-for-puppetee/meeohdhldndmeffgoccpgacfdigmphab)
 
-But you can use it as a simple proxy extension without Puppeteer. The only requirement is a working proxy server.
+You can also use it as a simple proxy extension without Puppeteer.
+The only requirement is a working proxy server.
 
 Here is a code example of how to use it programatically with Pupeteer:
 
-```javascript
-(async () => {
-  // ...
-  // Proxy Object - Replace with a working proxy
-  // Be sure that the proxy server is working otherwise the browser won't be able to access the internet
-  const proxy = {
-    type: 'http',
-    host: '127.0.0.1',
-    port: 8888,
-  };
+### Example
 
-  // Start puppeteer
-  const browser = await puppeteer.launch(options);
-  // get the extension context
-  // be sure to replace the extension id with the actual extension id check the extension id in the extension manager
-  // usually it should be: 'meeohdhldndmeffgoccpgacfdigmphab'
-  const proxyExtension = await browser.waitForTarget((t) => t.type() === 'background_page' && t.url().includes('meeohdhldndmeffgoccpgacfdigmphab'));
-
-  // set the proxy
-  proxyExtension.evaluate((proxy) => {
-    chrome.tabs.query({ active: true }, async (proxy) => {
-      window.setProxy(proxy);
-    });
-  }, proxy);
-
-  // ...
-})();
-```
+You can find in `index.ts` in the example folder a simple example of how to use puppeteer to change the proxy using the browser extension simple proxy for puppeteer. Link to the example [here](/example/readme.md).
 
 ### Some Notes
 
-- Be sure to set the proxy with a working proxy, the extension dosen't verify that your proxy is working, if the proxy is bad your connections will fail -> NET:ERR.
+- Be sure to set the proxy with a working proxy, the extension has a button to check if the proxy is working.
 
-- You can use **window.setProxy(proxy)** to set programaticaly the proxy for the browser at any time you want(probably after some x request), if you want to disable the proxy(direct access) use **window.setProxy(disableProxy)**.
+- Extension was rewritten to use Manifest V3 and newer technology in order to be still usable after Google Chrome will drop support for Manifest V2.
 
-- The extension does not support proxy authentication, HTTP and HTTPS proxy auth can be implemented, fell free to sumbit a pull request. As of the moment of this commit chromium browsers do not support SOCKS authentication.
+- The extension does not support proxy authentication, HTTP and HTTPS proxy auth can be implemented, in theory using basic auth and catching the webRequest event, might have some poor V3 support, and it is not implemented in this extension.
 
-## License
+### Screenshot
+
+![screenshot](/screen_1.webp)
+
+### License
 
 MIT

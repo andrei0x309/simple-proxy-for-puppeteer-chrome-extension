@@ -1,1 +1,35 @@
-{}
+{
+  "name": "simple-pupeteer-proxy-browser-extension",
+  "description": "Extension that can be used to set up a proxy for a browser, manually or with puppeteer",
+  "private": true,
+  "version": "1.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "pretty": "prettier --write .",
+    "release": "yarn config set version-tag-prefix simple-pupeteer-proxy-browser-extension@v &&  yarn config set version-git-message 'simple-pupeteer-proxy-browser-extension@v%s' && yarn version --patch && yarn postversion",
+    "postversion": "git push",
+    "create-release": "tsx ./scripts/create-release.ts",
+    "pub": "yarn build && yarn release && yarn create-release"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.23",
+    "@sveltejs/vite-plugin-svelte": "^3.0.2",
+    "@tsconfig/svelte": "^5.0.2",
+    "@types/chrome": "^0.0.263",
+    "@types/node": "^20.11.28",
+    "archiver": "^7.0.1",
+    "prettier": "^3.2.5",
+    "sass": "^1.72.0",
+    "svelte": "^4.2.12",
+    "svelte-check": "^3.6.6",
+    "tslib": "^2.6.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.6",
+    "yarn-upgrade-all": "^0.7.2"
+  }
+}
