@@ -2,7 +2,7 @@
   "name": "simple-pupeteer-proxy-browser-extension",
   "description": "Extension that can be used to set up a proxy for a browser, manually or with puppeteer",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
